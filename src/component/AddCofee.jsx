@@ -2,22 +2,36 @@ import React from 'react';
 
 const AddCofee = () => {
 
-const handlefromSubmit=event=>{
-    event.preventDefault();
-    const from = event.target;
+    const handlefromSubmit = event => {
+        event.preventDefault();
+        const from = event.target;
 
-    const name =from.name.value;
-    const quantity =from.quantity.value;
-    const supplier =from.supplier.value;
-    const teste =from.teste.value;
-    const category =from.category.value;
-    const details =from.details.value;
-    const photo =from.photo.value;
+        const name = from.name.value;
+        const quantity = from.quantity.value;
+        const supplier = from.supplier.value;
+        const teste = from.teste.value;
+        const category = from.category.value;
+        const details = from.details.value;
+        const photo = from.photo.value;
 
-    const coffee ={name,quantity,supplier,teste,category,details,photo}
+        const coffee = { name, quantity, supplier, teste, category, details, photo }
 
-    console.log(coffee);
-}
+        console.log(coffee);
+
+        // sent to data in server
+
+        fetch('http://localhost:5000/coffee', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(coffee)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
 
     return (
         <div className='bg-[#F4F3F0]'>
@@ -90,11 +104,11 @@ const handlefromSubmit=event=>{
                                 <span className="label-text">Photo Url</span>
                             </label>
                             <label className="input-group">
-                                <input type="text" placeholder="Enter photo url"  name='photo' className="input input-bordered w-full" />
+                                <input type="text" placeholder="Enter photo url" name='photo' className="input input-bordered w-full" />
                             </label>
                         </div>
                     </div>
-                <input type="submit" value="Added Coffee" className="btn w-full bg-[#D2B48C]"/>
+                    <input type="submit" value="Added Coffee" className="btn w-full bg-[#D2B48C]" />
                 </div>
             </form>
         </div>
