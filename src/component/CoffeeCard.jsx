@@ -1,7 +1,10 @@
 import React from 'react';
 
-const CoffeeCard = ({ coffee }) => {
-    const { name, quantity, supplier, teste, category, details, photo } = coffee;
+const CoffeeCard = ({ coffee,handleDeleteBtn }) => {
+    const {_id, name, quantity, supplier, teste, category, details, photo } = coffee;
+
+   
+
     return (
         <div className="card card-side bg-base-100 shadow-xl">
             <figure><img src={photo} alt="Movie" /></figure>
@@ -17,7 +20,7 @@ const CoffeeCard = ({ coffee }) => {
                 <div className="btn-group btn-group-vertical space-y-4">
                     <button className="btn ">Veiw</button>
                     <button className="btn">Update</button>
-                    <button className="btn">Delete</button>
+                    <button onClick={() => handleDeleteBtn(_id)} className="btn bg-red-500" >Delete</button>
                 </div>
             </div>
         </div>
