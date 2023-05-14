@@ -7,37 +7,35 @@ import { useState } from 'react';
 function App() {
   const lodadedCoffes = useLoaderData();
 
-  const [coffees,setCoffees] = useState(lodadedCoffes)
+  const [coffees, setCoffees] = useState(lodadedCoffes)
 
   const handleDeleteBtn = (id) => {
-    fetch(`http://localhost:5000/coffee/${id}`,{
-        method:"DELETE"
+    fetch(`http://localhost:5000/coffee/${id}`, {
+      method: "DELETE"
     })
-    .then(res=>res.json())
-    .then(data=>{
+      .then(res => res.json())
+      .then(data => {
         console.log(data);
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              if(deletedCount===1){
-                 const newCoffees = coffees.filter(coffee=>coffee._id===id)
-                 setCoffees(newCoffees)
-                 Swal.fire(
-                  'Deleted!',
-                  'Your file has been deleted.',
-                  'success') 
-              }
-            }
-          })
-    })
-}
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success')
+            const newCoffees = coffees.filter(coffee => coffee._id !== id)
+            setCoffees(newCoffees)
+          }
+        })
+      })
+  }
 
   return (
     <div className='mx-20 my-10'>
