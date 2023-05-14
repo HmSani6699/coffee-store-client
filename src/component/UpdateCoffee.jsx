@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const UpdateCoffee = () => {
 
@@ -33,7 +34,7 @@ const UpdateCoffee = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if (data.insertedId) {
+                if (data.modifiedCount ===1) {
                     swal({
                         icon: "success",
                         title: "Coffee update Success full !",
